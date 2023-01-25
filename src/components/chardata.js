@@ -2,16 +2,15 @@ import Select from "react-select";
 import React, {useEffect, useState} from "react";
 import ColChart from "./colchart";
 
-const ChartData = ({data, param}) => {
+const ChartData = ({data, param, labels}) => {
     const [weekD, setWeekD] = useState(null);
     const [ops, setOps] = useState(null)
     const [xaxis, setX] = useState([])
     const [chartSeries, setCS] = useState(null);
     useEffect(() => {
-        const cate = setXaxis(data, [])
         const temp = []
         data.map(item => item.pop())
-        cate.map(item => {
+        labels.map(item => {
             temp.push({
                 value:item,
                 label:item
@@ -20,14 +19,16 @@ const ChartData = ({data, param}) => {
         setOps(temp)
     }, [])
     useEffect(() => {
+        console.log(param)
         setWeekD(null)
         const cate = setXaxis(data, xaxis)
         setcsvData(data, param, cate)
     }, [param])
+
     const setXaxis = (data, xval) =>{
         let temp1 = []
         let cate = []
-        data[0].map(item => {
+        labels.map(item => {
             if(xval.length > 0){
                 xval.map(item => {
                     let ind = temp1.findIndex(x => x === item.value)
@@ -35,8 +36,8 @@ const ChartData = ({data, param}) => {
                 })
             } 
             else{
-                let ind = temp1.findIndex(x => x === item['L2 Cluster'])
-                if(ind < 0) temp1.push(item['L2 Cluster'])
+                let ind = temp1.findIndex(x => x === item)
+                if(ind < 0) temp1.push(item)
             }
         })
         if(param === "L2 Review Count"){
@@ -147,8 +148,6 @@ const ChartData = ({data, param}) => {
             trinve:nve,
             maxi:max
         })
-        console.log(max)
-        
     }
     return(
         <>
