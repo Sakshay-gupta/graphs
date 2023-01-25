@@ -9,8 +9,9 @@ const Header = () =>{
                 <span>Detailed Analysis</span>
             </div>
             <div className="content">
-                <div className="heading">Detailed Analysis</div>
+                <div className="heading">Competitive Analysis</div>
                 <div>Estee Lauder: Double Wear Stay-in-Place Foundation</div>
+                <div>Tient Idole Ultra 24H Long Wear Matte Foundatiion</div>
             </div>
         </div>
     )

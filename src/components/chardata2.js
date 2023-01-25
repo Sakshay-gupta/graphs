@@ -63,7 +63,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointspve.push({
                         x:Math.round(parseFloat(csv[ind][`${param}`])*100)/100,
                         y:Math.round(parseFloat(csv[ind2][`${param}`])*100)/100,
-                        z:parseFloat(csv[ind][`${param}`]) * parseFloat(csv[ind2][`${param}`]),
+                        z:parseInt(csv[ind2]['L2 Review Count']) + parseInt(csv[ind]['L2 Review Count']),
                         name:`P${index + 1}+`,
                         val:`Product ${index + 1} Positive`,
                         
@@ -73,7 +73,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointspve.push({
                         x:Math.round(parseFloat(csv[ind][`${param}`])*100)/100,
                         y:0,
-                        z:parseFloat(csv[ind][`${param}`]),
+                        z:parseInt(csv[ind]['L2 Review Count']),
                         name:`P${index + 1}+`,
                         val:`Product ${index + 1} Positive`
                     })
@@ -84,7 +84,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointspve.push({
                         x:0,
                         y:Math.round(parseFloat(csv[ind2][`${param}`])*100)/100,
-                        z:parseFloat(csv[ind2][`${param}`]),
+                        z:parseInt(csv[ind2]['L2 Review Count']),
                         name:`P${index + 1}+`,
                         val:`Product ${index + 1} Positive`
                     })
@@ -107,7 +107,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointsnve.push({
                         x:Math.round(parseFloat(csv[ind3][`${param}`])*100)/100,
                         y:Math.round(parseFloat(csv[ind4][`${param}`])*100)/100,
-                        z:parseFloat(csv[ind3][`${param}`]) * parseFloat(csv[ind4][`${param}`]),
+                        z:parseInt(csv[ind3]['L2 Review Count']) + parseInt(csv[ind4]['L2 Review Count']),
                         name:`P${index + 1}-`,
                         val:`Product ${index + 1} Negative`
                     })
@@ -116,7 +116,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointsnve.push({
                         x:Math.round(parseFloat(csv[ind3][`${param}`])*100)/100,
                         y:0,
-                        z:parseFloat(csv[ind3][`${param}`]),
+                        z:parseInt(csv[ind3]['L2 Review Count']),
                         name:`P${index + 1}-`,
                         val:`Product ${index + 1} Negative`
                     })
@@ -127,7 +127,7 @@ const ChartData2 = ({data, param}) => {
                     dataPointsnve.push({
                         x:0,
                         y:Math.round(parseFloat(csv[ind4][`${param}`])*100)/100,
-                        z:parseFloat(csv[ind4][`${param}`]),
+                        z:parseInt(csv[ind4]['L2 Review Count']),
                         name:`P${index + 1}-`,
                         val:`Product ${index + 1} Negative`
                     })

@@ -34,9 +34,10 @@ const BubbleChart = ({data, params}) => {
                     colorByPoint:true,
                     tooltip: {
                         useHTML: true,
-                        pointFormat: `{point.val}: ${data.xval}: {point.x} ${data.yval}: {point.y}`,
+                        pointFormat: `{point.val}: ${data.xval}: {point.x} ${data.yval}: {point.y} count: {point.z}`,
                         followPointer: true
                     },
+                    sizeBy:"area"
                 }]
             }
         })
@@ -69,9 +70,10 @@ const BubbleChart = ({data, params}) => {
                     colorByPoint:true,
                     tooltip: {
                         useHTML: true,
-                        pointFormat: `{point.val}: ${data.xval}: {point.x} ${data.yval}: {point.y}`,
+                        pointFormat: `{point.val}: ${data.xval}: {point.x} ${data.yval}: {point.y} count: {point.z}`,
                         followPointer: true
                     },
+                    sizeBy:"area"
                 }]
             }
         })
@@ -97,24 +99,33 @@ const BubbleChart = ({data, params}) => {
                 valueDescriptionFormat: '{index}. {point.name}, Positive: {point.x}, Negative: {point.y}'
             }
         },
+        xAxis:{
+            max:5,
+            min:0,
+            tickInterval:1
+        },
         yAxis:{
             opposite:false,
             gridLineWidth: 0,
+            max:5,
+            min:0,
+            tickInterval:1
         },
         plotOptions:{
             series: {
                 dataLabels: {
                     enabled: true,
                     format: '{point.name}'
-                }
-            }
+                },
+                zMin:100,
+            },
         },
     })
     const [options2, setOptions2] = useState({
         chart:{
             type: 'bubble',
             plotBorderWidth: 1,
-            zoomType: 'xy',
+            
             // marginTop:50,
             // marginBottom:50,
             // marginLeft:50,
@@ -131,16 +142,25 @@ const BubbleChart = ({data, params}) => {
                 valueDescriptionFormat: '{index}. {point.name}, Positive: {point.x}, Negative: {point.y}'
             }
         },
+        xAxis:{
+            max:5,
+            min:0,
+            tickInterval:1
+        },
         yAxis:{
             opposite:false,
             gridLineWidth: 0,
+            max:5,
+            min:0,
+            tickInterval:1
         },
         plotOptions:{
             series: {
                 dataLabels: {
                     enabled: true,
                     format: '{point.name}'
-                }
+                },
+                zMin:0
             }
         },
     })
