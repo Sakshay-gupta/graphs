@@ -8,6 +8,7 @@ const HeaderChart = () =>{
                 <Link to='/'>Re-Upload Data</Link>
                 <Link to='/chart'>Detailed Chart</Link>
                 <Link to='/chart2'>Comparison Chart</Link>
+                <Link to='/chart3'>Pie Chart</Link>
             </div>
         </div>
     )

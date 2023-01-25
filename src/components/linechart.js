@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock"
 
-const ColChart = ({data, chartS, params}) => {
+const LineChart = ({data, chartS, params}) => {
     useEffect(() => {
         setOptions(prev => {
             return{
@@ -106,4 +106,4 @@ const ColChart = ({data, chartS, params}) => {
     ) 
 }
 
-export default ColChart;
+export default LineChart;

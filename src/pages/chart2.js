@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import HeaderChart from "../components/headerchart";
-import ChartData2 from "../components/chardata2";
+import ChartData2 from "../components/bubblechartdata";
 const Chart2 = () => {
     const [data, setData] = useState(JSON.parse(sessionStorage.getItem('data')))
     const [param, setParam] = useState("L2 Rating (Review)")

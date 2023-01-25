@@ -1,6 +1,6 @@
 import React, {useState}from "react";
 import Papa from 'papaparse'
-import ChartData from "./chardata";
+import LineChart from "./linechartdata";
 import ChartData2 from "./temp";
 class Main extends React.Component {
     constructor(){
@@ -101,7 +101,7 @@ class Main extends React.Component {
                 <input type="radio" id="count" name="chart" onClick={this.changeCount}/>
                 <label htmlFor="count">No. of Reviews</label>
             </div>
-            {this.state.load ? "Select CSV to create Chart" : <ChartData data={this.state.data} param={this.state.param}/>}
+            {this.state.load ? "Select CSV to create Chart" : <LineChart data={this.state.data} param={this.state.param}/>}
             {/* {cols ? <SelectCol cols={cols} /> : null} */}
         </div>)
     }

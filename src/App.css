@@ -62,3 +62,12 @@
   background-color: rgb(88, 88, 252);
   color: white;
 }
+
+.piechartparent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.piechartchild{
+  flex-basis: "45%" /* explanation below */
+}

@@ -1,6 +1,6 @@
 import Select from "react-select";
 import React, {useEffect, useState} from "react";
-import ColChart from "./colchart";
+import Linechart from "./linechart";
 
 const ChartData = ({data, param, labels}) => {
     const [weekD, setWeekD] = useState(null);
@@ -164,7 +164,7 @@ const ChartData = ({data, param, labels}) => {
                 <div style={{alignSelf: "center"}}><button onClick={handleFilter}> Filter Chart</button></div>
                 {/* <div style={{alignSelf: "center"}}><button onClick={handleRemove}> Remove Filter</button></div> */}
             </div> : null }
-            {weekD ? <ColChart data={weekD} chartS={chartSeries} params={param}/> : "Building"}
+            {weekD ? <Linechart data={weekD} chartS={chartSeries} params={param}/> : "Building"}
         </>
     )
 }

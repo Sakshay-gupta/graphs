@@ -1,6 +1,6 @@
 import { charts } from "highcharts";
 import React, {useEffect, useState} from "react";
-import ColChart from "./colchart";
+import LineChart from "./linechart";
 import Select from "react-select";
 class ChartData2 extends React.Component{
     constructor(props){
@@ -120,7 +120,7 @@ class ChartData2 extends React.Component{
             <div style={{width:"30%"}}>
                 <Select/>
             </div>
-            {this.state.weekD ? <ColChart data={this.state.weekD} chartS={this.state.chartSeries} params={this.props.param}/> : "Building"}
+            {this.state.weekD ? <LineChart data={this.state.weekD} chartS={this.state.chartSeries} params={this.props.param}/> : "Building"}
         </>
         )
     }
