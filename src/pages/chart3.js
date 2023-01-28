@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import HeaderChart from "../components/headerchart";
 import PieChartData from "../components/piechartdata";
+import { useLocation } from "react-router";
 const Chart3 = () => {
-    const [data, setData] = useState(JSON.parse(sessionStorage.getItem('data')))
+    const location = useLocation();
+    const {chartData} = location.state
     const [labels, setLabels] = useState(null)
     useEffect(() => {
-        setLabels(setXaxispre(data))
+        setLabels(setXaxispre(chartData))
         console.log(labels)
     }, [])
 
@@ -41,7 +43,7 @@ const Chart3 = () => {
         return cate;
     }
     return(<>
-        <HeaderChart />
+        <HeaderChart chartData={chartData}/>
         {/* <div style={{marginTop:"10px"}}>
             <input type="radio" id="rating" name="chart" defaultChecked onClick={changeRate}/>
             <label htmlFor="rating">Review Rating</label>
@@ -49,7 +51,7 @@ const Chart3 = () => {
             <input type="radio" id="count" name="chart" onClick={changeCount}/>
             <label htmlFor="count">No. of Reviews</label>
         </div> */}
-        {labels ? <PieChartData data={data} labels={labels}/> : null}
+        {labels ? <PieChartData data={chartData} labels={labels}/> : null}
     </>)
 }
 
