@@ -55,8 +55,8 @@ class Homeclass extends React.Component {
                 load:false,
                 data:[...prev.data, res.data]
             }), () => {
-                sessionStorage.setItem('data', JSON.stringify(this.state.data))
-                this.props.navi('/chart')
+                //sessionStorage.setItem('data', JSON.stringify(this.state.data))
+                this.props.navi('/chart', {state:{chartData:this.state.data}})
             })
         }
         else{

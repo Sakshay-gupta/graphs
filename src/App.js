@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./header";
 import Main from "./components/main";
 import Home from "./pages/homepage";
@@ -9,6 +9,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Chart3 from "./pages/chart3";
 function App() {
+  const [data, setdata] = useState()
+  const handledata = (chartdata) => {
+    setdata(data)
+  }
   return (
     <BrowserRouter>
       <Header />
