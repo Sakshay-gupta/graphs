@@ -14,6 +14,11 @@ const timeStampMonth =  (date) => {
         return newWeek.getTime();
     }
 }
+
+const timeStamp = (date) => {
+    const newWeek = new Date(`01-${date}`)
+    return newWeek.getTime()
+}
 const MonthChartData = ({data}) => {
     const [chartData, setData] = useState(null)
     useEffect(() => {
@@ -44,39 +49,45 @@ const MonthChartData = ({data}) => {
         const p17 = []
         const p18 = []
         csv.map(item => {
-            xaxis.push(item['Date'])
-            console.log(item)
-            p1.push(parseInt(item['P1']) === 0 ? null : parseInt(item['P1']))
-            p2.push(parseInt(item['P2']) === 0 ? null : parseInt(item['P2']))
+            xaxis.push(timeStamp(item['Date']))
+            p1.push([timeStamp(item['Date']), parseInt(item['P1']) === 0 ? null : parseInt(item['P1'])])
+            p2.push([timeStamp(item['Date']), parseInt(item['P2']) === 0 ? null : parseInt(item['P2'])])
             //p3.push(parseInt(item['P3']) === 0 ? null : parseInt(item['P3']))
-            p4.push(parseInt(item['P4']) === 0 ? null : parseInt(item['P4']))
-            p5.push(parseInt(item['P5']) === 0 ? null : parseInt(item['P5']))
-            p6.push(parseInt(item['P6']) === 0 ? null : parseInt(item['P6']))
-            p7.push(parseInt(item['P7']) === 0 ? null : parseInt(item['P7']))
-            p8.push(parseInt(item['P8']) === 0 ? null : parseInt(item['P8']))
+            p4.push([timeStamp(item['Date']), parseInt(item['P4']) === 0 ? null : parseInt(item['P4'])])
+            p5.push([timeStamp(item['Date']), parseInt(item['P5']) === 0 ? null : parseInt(item['P5'])])
+            p6.push([timeStamp(item['Date']), parseInt(item['P6']) === 0 ? null : parseInt(item['P6'])])
+            p7.push([timeStamp(item['Date']), parseInt(item['P7']) === 0 ? null : parseInt(item['P7'])])
+            p8.push([timeStamp(item['Date']), parseInt(item['P8']) === 0 ? null : parseInt(item['P8'])])
             if(parseInt(item['P1']) !== 0){
                 p11.push(parseInt(item['P1']))
+                //p11.push([timeStamp(item['Date']), parseInt(item['P1']) === 0 ? null : parseInt(item['P1'])])
             }
             if(parseInt(item['P2']) !== 0){
                 p12.push(parseInt(item['P2']))
+                //p12.push([timeStamp(item['Date']), parseInt(item['P2']) === 0 ? null : parseInt(item['P2'])])
             }
             // if(parseInt(item['P3']) !== 0){
             //     p13.push(parseInt(item['P3']))
             // }
             if(parseInt(item['P4']) !== 0){
                 p14.push(parseInt(item['P4']))
+                //p14.push([timeStamp(item['Date']), parseInt(item['P4']) === 0 ? null : parseInt(item['P4'])])
             }
             if(parseInt(item['P5']) !== 0){
                 p15.push(parseInt(item['P5']))
+                //p15.push([timeStamp(item['Date']), parseInt(item['P5']) === 0 ? null : parseInt(item['P5'])])
             }
             if(parseInt(item['P6']) !== 0){
                 p16.push(parseInt(item['P6']))
+                //p16.push([timeStamp(item['Date']), parseInt(item['P6']) === 0 ? null : parseInt(item['P6'])])
             }
             if(parseInt(item['P7']) !== 0){
                 p17.push(parseInt(item['P7']))
+                //p17.push([timeStamp(item['Date']), parseInt(item['P7']) === 0 ? null : parseInt(item['P7'])])
             }
             if(parseInt(item['P8']) !== 0){
                 p18.push(parseInt(item['P8']))
+                //p18.push([timeStamp(item['Date']), parseInt(item['P8']) === 0 ? null : parseInt(item['P8'])])
             }
         })
         series1.push({
@@ -161,7 +172,7 @@ const MonthChartData = ({data}) => {
         })
         const month = []
         for(var i = 1; i <= xaxis.length; i++){
-            month.push(i > 11 ? `Year ${Math.round(i/12)}`: `Month ${i}`)
+            month.push(i > 11 ? `Y ${Math.round(i/12)}`: `M ${i}`)
         }
         setData({
             s1:series1,
@@ -220,7 +231,7 @@ const MonthChartData = ({data}) => {
             })
         })
         for(var i = 1; i <= max; i++){
-            month.push(i > 11 ? `Year ${Math.round(i/12)}`: `Month ${i}`)
+            month.push(i > 11 ? `Y ${Math.round(i/12)}`: `M ${i}`)
         }
         setData({
             s1:series1,

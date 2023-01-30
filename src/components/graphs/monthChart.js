@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from 'highcharts'
+import Highcharts from 'highcharts/highstock'
 const MonthChart = ({data}) => {
     const [options, setOptions] = useState({
         chart:{
@@ -35,6 +35,18 @@ const MonthChart = ({data}) => {
             align:'center',
             verticalAlign:'top',
         },
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false,
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        },
     })
     useEffect(() => {
         console.log(data)
@@ -45,16 +57,17 @@ const MonthChart = ({data}) => {
             <><div >
             <HighchartsReact
             highcharts={Highcharts}
+            constructorType={'stockChart'}
             options={{
                 ...options,
                 xAxis: {
-                    // type: 'datetime',
-                    // dateTimeLabelFormats: {
-                    //   day: "%e. %b",
-                    //   month: "%b '%y",
-                    //   year: "%Y"
-                    // }
-                    categories:data['xaxis'],
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                      day: "%e. %b",
+                      month: "%b '%y",
+                      year: "%Y"
+                    },
+                    
                   },
                 series:[...data['s1']]
             }}
@@ -63,8 +76,12 @@ const MonthChart = ({data}) => {
         <div>
             <HighchartsReact
             highcharts={Highcharts}
+            //constructorType={'stockChart'}
             options={{
                 ...options,
+                chart:{
+                    zoomType: 'x',
+                },
                 xAxis:{
                     categories:data['mon'],
                 },
