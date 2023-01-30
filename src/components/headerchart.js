@@ -13,6 +13,7 @@ const HeaderChart = (props) =>{
                     <Link to='/chart' state={{ chartData:props.chartData }}>Detailed Chart</Link>
                     <Link to='/chart2' state={{ chartData:props.chartData }}>Comparison Chart</Link>
                     <Link to='/chart3' state={{ chartData:props.chartData }}>Pie Chart</Link>
+                    <Link to='/chart4' state={{ chartData:props.chartData }}>Month Chart</Link>
                 </div>
             </div>
         </>

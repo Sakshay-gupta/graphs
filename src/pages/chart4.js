@@ -16,7 +16,7 @@ const timeStampMonth =  (date) => {
         return newWeek.getTime();
     }
 }
-const Chart4 = ({chartData}) => {
+const Chart4 = () => {
     const location = useLocation()
     const [data, setData] = useState(null)
     //const [param, setParam] = useState("L2 Rating (Review)")
@@ -43,8 +43,11 @@ const Chart4 = ({chartData}) => {
         })
         setData(arr)
     }
+
+    const {chartData} = location.state
+
     return(<>
-        <HeaderChart />
+        <HeaderChart chartData={chartData}/>
         {data ? <MonthChartData data={data}/> : null}
     </>)
 }

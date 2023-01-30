@@ -5,6 +5,9 @@ const PieChartData = ({data, labels}) =>{
     useEffect(() => {
         setPiechartData(data, labels)
     }, [])
+    useEffect(() => {
+        setPiechartData(data, labels)
+    }, [labels])
     const setPiechartData = (data, labels) => {
         const series = []
         data.map((csv, index) => {
