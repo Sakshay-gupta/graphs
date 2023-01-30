@@ -86,6 +86,7 @@ const Chart4 = () => {
 
     return(<>
         <HeaderChart chartData={chartData}/>
+        {load ? <MonthChartData data={data}/> : null}
         <div className="form-container">
             <label htmlFor="csvInput" className="form-label">Import csv file for Charts</label>
             <input
@@ -105,7 +106,6 @@ const Chart4 = () => {
                 Create Chart
             </button>
         </div>
-        {load ? <MonthChartData data={data}/> : null}
     </>)
 }
 

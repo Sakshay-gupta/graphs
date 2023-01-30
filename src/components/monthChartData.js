@@ -52,7 +52,7 @@ const MonthChartData = ({data}) => {
             xaxis.push(timeStamp(item['Date']))
             p1.push([timeStamp(item['Date']), parseInt(item['P1']) === 0 ? null : parseInt(item['P1'])])
             p2.push([timeStamp(item['Date']), parseInt(item['P2']) === 0 ? null : parseInt(item['P2'])])
-            //p3.push(parseInt(item['P3']) === 0 ? null : parseInt(item['P3']))
+            p3.push([timeStamp(item['Date']), parseInt(item['P3']) === 0 ? null : parseInt(item['P3'])])
             p4.push([timeStamp(item['Date']), parseInt(item['P4']) === 0 ? null : parseInt(item['P4'])])
             p5.push([timeStamp(item['Date']), parseInt(item['P5']) === 0 ? null : parseInt(item['P5'])])
             p6.push([timeStamp(item['Date']), parseInt(item['P6']) === 0 ? null : parseInt(item['P6'])])
@@ -66,9 +66,9 @@ const MonthChartData = ({data}) => {
                 p12.push(parseInt(item['P2']))
                 //p12.push([timeStamp(item['Date']), parseInt(item['P2']) === 0 ? null : parseInt(item['P2'])])
             }
-            // if(parseInt(item['P3']) !== 0){
-            //     p13.push(parseInt(item['P3']))
-            // }
+            if(parseInt(item['P3']) !== 0){
+                p13.push(parseInt(item['P3']))
+            }
             if(parseInt(item['P4']) !== 0){
                 p14.push(parseInt(item['P4']))
                 //p14.push([timeStamp(item['Date']), parseInt(item['P4']) === 0 ? null : parseInt(item['P4'])])
@@ -100,34 +100,34 @@ const MonthChartData = ({data}) => {
             name:'P2',
             data: p2,
         })
-        // series1.push({
-        //     type:"line",
-        //     name:'P3',
-        //     data: p3,
-        // })
         series1.push({
             type:"line",
             name:'P3',
-            data: p4,
+            data: p3,
         })
         series1.push({
             type:"line",
             name:'P4',
-            data: p5,
+            data: p4,
         })
         series1.push({
             type:"line",
             name:'P5',
-            data: p6,
+            data: p5,
         })
         series1.push({
             type:"line",
             name:'P6',
-            data: p7,
+            data: p6,
         })
         series1.push({
             type:"line",
             name:'P7',
+            data: p7,
+        })
+        series1.push({
+            type:"line",
+            name:'P8',
             data: p8,
         })
         series2.push({
@@ -140,34 +140,34 @@ const MonthChartData = ({data}) => {
             name:'P2',
             data: p12,
         })
-        // series2.push({
-        //     type:"line",
-        //     name:'P3',
-        //     data: p13,
-        // })
         series2.push({
             type:"line",
             name:'P3',
-            data: p14,
+            data: p13,
         })
         series2.push({
             type:"line",
             name:'P4',
-            data: p15,
+            data: p14,
         })
         series2.push({
             type:"line",
             name:'P5',
-            data: p16,
+            data: p15,
         })
         series2.push({
             type:"line",
             name:'P6',
-            data: p17,
+            data: p16,
         })
         series2.push({
             type:"line",
             name:'P7',
+            data: p17,
+        })
+        series2.push({
+            type:"line",
+            name:'P8',
             data: p18,
         })
         const month = []

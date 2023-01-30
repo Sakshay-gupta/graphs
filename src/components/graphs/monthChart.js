@@ -7,7 +7,7 @@ const MonthChart = ({data}) => {
             type:'line',
         },
         title: {
-            text: "Monthly Number of reviews"
+            text: "Monthly #Reviews"
         },
         xAxis:{
             labels: {

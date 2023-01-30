@@ -1,3 +1,18 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.4;
+  background: #f2f3f3;
+  color: #444;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -70,4 +85,35 @@
 }
 .piechartchild{
   flex-basis: "45%" /* explanation below */
+}
+.nav-cont {
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+.nav-elem-1 {
+  font-weight: 600;
+  cursor: pointer;
+}
+.nav-elem-2,
+.nav-elem-3,
+.nav-elem-4 {
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 2px solid grey;
+  cursor: pointer;
+}
+
+.nav-elem-1.active,
+.nav-elem-2.active,
+.nav-elem-3.active,
+.nav-elem-4.active {
+  color: orangered;
+}
+.app_container {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20px;
+  padding: 10px;
 }

@@ -2,18 +2,24 @@ import React from "react";
 
 const Header = () =>{
     return(
-        <div>
-            <div className="header">
-                <span>Overview</span>
-                <span>Priority Areas</span>
-                <span>Detailed Analysis</span>
+        <>
+        <div className={`nav-cont `}>
+                <span className={`nav-elem-1 active`} >Page 1</span>
+                <span className={`nav-elem-2`} >Page 5</span>
+        </div>
+        <div className="app_container">
+            <div className={`nav-cont `}>
+                <span className={`nav-elem-1 active`}>Foundation</span>
+                <span className={`nav-elem-2 `}>Primer</span>
+                <span className={`nav-elem-3 `}>Eye Shadow</span>
             </div>
-            <div className="content">
-                <div className="heading">Competitive Analysis</div>
-                <div>Estee Lauder: Double Wear Stay-in-Place Foundation</div>
-                <div>Tient Idole Ultra 24H Long Wear Matte Foundatiion</div>
+            <div className={`nav-cont `}>
+                <span className={`nav-elem-1 `}><i>Launch Tracker</i></span>
+                <span className={`nav-elem-2 active`}><i>Detailed Tracker</i></span>
             </div>
         </div>
+        </>
+
     )
 }
 
