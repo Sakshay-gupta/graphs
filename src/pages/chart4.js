@@ -52,20 +52,6 @@ const Chart4 = () => {
         
     };
     const updateData = (res, ind) =>{
-        // if(ind === file.length - 1){
-        //     this.setState(prev => ({
-        //         load:false,
-        //         data:[...prev.data, res.data]
-        //     }), () => {
-        //         //sessionStorage.setItem('data', JSON.stringify(this.state.data))
-        //         this.props.navi('/chart', {state:{chartData:this.state.data}})
-        //     })
-        // }
-        // else{
-        //     this.setState(prev => ({
-        //         data:[...prev.data, res.data]
-        //     }))
-        // }
         if(ind === file.length - 1){
             setData(prev => {
                 return[...prev, res.data]
