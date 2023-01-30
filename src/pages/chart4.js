@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 import HeaderChart from "../components/headerchart";
 import MonthChartData from "../components/monthChartData";
+import Papa from 'papaparse'
 const timeStampMonth =  (date) => {
     const arr = ["None","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const temp = date.split(' ');
@@ -18,14 +19,65 @@ const timeStampMonth =  (date) => {
 }
 const Chart4 = () => {
     const location = useLocation()
-    const [data, setData] = useState(null)
-    //const [param, setParam] = useState("L2 Rating (Review)")
-    useEffect(() => {
-        const csv = chartData
-        console.log(csv)
-        setdateTime(csv)
-    }, [])
+    const [data, setData] = useState([])
+    const [load, setLoad] = useState(false)
+    const [file, setFile] = useState([])
 
+    const handleOnChange = (e) => {
+        setLoad(false)
+        setData([])
+        if(e.target.files[0]){
+            setFile((prev) => {
+                return [...prev, e.target.files[0]]
+            });
+        }
+    }
+    const handleOnSubmit = () => {
+        setLoad(false)
+        setData([])
+        const set = async () => {
+            file.map((item, ind) => {
+                Papa.parse(item, {
+                    complete:(res) => updateData(res, ind),
+                    header: true});
+            })
+        }
+        if (file.length) {
+            const help = async () => {
+                await set().then(() => {
+                })
+            }
+            help()
+        }
+        
+    };
+    const updateData = (res, ind) =>{
+        // if(ind === file.length - 1){
+        //     this.setState(prev => ({
+        //         load:false,
+        //         data:[...prev.data, res.data]
+        //     }), () => {
+        //         //sessionStorage.setItem('data', JSON.stringify(this.state.data))
+        //         this.props.navi('/chart', {state:{chartData:this.state.data}})
+        //     })
+        // }
+        // else{
+        //     this.setState(prev => ({
+        //         data:[...prev.data, res.data]
+        //     }))
+        // }
+        if(ind === file.length - 1){
+            setData(prev => {
+                return[...prev, res.data]
+            })
+            setLoad(true)
+        }
+        else{
+            setData(prev => {
+                return[...prev, res.data]
+            })
+        }
+    }
     const setdateTime = (csv) => {
         const arr = []
         csv.map(item => {
@@ -48,7 +100,26 @@ const Chart4 = () => {
 
     return(<>
         <HeaderChart chartData={chartData}/>
-        {data ? <MonthChartData data={data}/> : null}
+        <div className="form-container">
+            <label htmlFor="csvInput" className="form-label">Import csv file for Charts</label>
+            <input
+                type={"file"}
+                id={"csvInput"}
+                accept={".csv"}
+                onChange={(e) => {handleOnChange(e)}}
+            />
+            {file.length > 0 ? file.map((item, ind) => {
+                return(<div key={ind} style={{margin:"10px"}}>
+                    {item.name}
+                </div>)
+            }):<div style={{marginTop:"10px"}}>No files added</div>}
+            <button className="form-button"
+                onClick={handleOnSubmit}
+            >
+                Create Chart
+            </button>
+        </div>
+        {load ? <MonthChartData data={data}/> : null}
     </>)
 }
 

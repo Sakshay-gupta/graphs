@@ -41,30 +41,72 @@ const MonthChart = ({data}) => {
     }, [])
     return(
         <>
-        {data ? <div>
-            {data.map((item, index) => {
-                return(<div key={index} >
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={{
-                        ...options,
-                        xAxis:{
-                            categories:item['xaxis'],
-                        },
-                        series:[{
-                            //zMin:item['senti'] === 'Positive' ? 0 : 0,
-                            //name:item['seriesname'],
-                            //colorByPoint:true,
-                            data:item['data']
-                        }]
-                    }}
-                    allowChartUpdate = {true} 
-                    />
-            </div>)
-            })}
-        </div> : null}
+        {data ? 
+            <><div >
+            <HighchartsReact
+            highcharts={Highcharts}
+            options={{
+                ...options,
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                      day: "%e. %b",
+                      month: "%b '%y",
+                      year: "%Y"
+                    }
+                  },
+                series:[...data['s1']]
+            }}
+            allowChartUpdate = {true} />
+        </div>
+        <div>
+            <HighchartsReact
+            highcharts={Highcharts}
+            options={{
+                ...options,
+                xAxis:{
+                    categories:data['mon'],
+                },
+                series:[...data['s2']]
+            }}
+            allowChartUpdate = {true} />
+        </div></>
+        : null}
         </>
     )
 }
 
 export default MonthChart
+// {data ? <div style={{display:"flex", justifyContent:"space-around"}}>
+//                 <HighchartsReact
+//                 highcharts={Highcharts}
+//                 options={options1}
+//                 allowChartUpdate = {true} />
+//                 <HighchartsReact
+//                 highcharts={Highcharts}
+//                 options={options2}
+//                 allowChartUpdate = {true} />
+//                 </div>
+//             : <div>
+//                 loading
+//             </div>}
+// {data.map((item, index) => {
+//     return(<div key={index} >
+//     <HighchartsReact
+//         highcharts={Highcharts}
+//         options={{
+//             ...options,
+//             xAxis:{
+//                 categories:item['xaxis'],
+//             },
+//             series:[{
+//                 //zMin:item['senti'] === 'Positive' ? 0 : 0,
+//                 //name:item['seriesname'],
+//                 //colorByPoint:true,
+//                 data:item['data']
+//             }]
+//         }}
+//         allowChartUpdate = {true} 
+//         />
+// </div>)
+// })}

@@ -1,17 +1,51 @@
 import React, { useEffect, useState } from "react";
 import MonthChart from "./graphs/monthChart";
-
+const timeStampMonth =  (date) => {
+    const arr = ["None","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    let temp = date.split(' ');
+    if(temp.length === 1){
+        temp = date.split('/')
+        //const ind = parseInt(months[1]);
+        const newWeek = new Date(`${temp[2]}.${temp[0]}.01`)
+        return newWeek.getTime();
+    }
+    else{
+        const newWeek = new Date(`${temp[2]}.${temp[1]}.01`)
+        return newWeek.getTime();
+    }
+}
 const MonthChartData = ({data}) => {
     const [chartData, setData] = useState(null)
     useEffect(() => {
-        setSeriesData(data)
+        const arr = setdateTime(data)
+        console.log(arr)
+        setSeriesData(arr)
     }, [])
+
+    const setdateTime = (csv) => {
+        const arr = []
+        csv.map(item => {
+            const temp = []
+            item.map(row => {
+                const time = timeStampMonth(row['Date'])
+                temp.push({
+                    date:time
+                })
+            })
+            temp.sort((a, b) => a.date - b.date)
+            arr.push(temp)
+        })
+        return arr
+    }
     const setSeriesData = (data) => {
-        const series = []
+        const series1 = []
+        const series2 = []
+        let max = 0
+        const month = []
         data.map((csv,ind) => {
             //let start = true
-            const temp = []
-            const month = []
+            const temp1 = []
+            const temp2 = []
             let index = 1
             for(var i = 0; i < csv.length; i++){
                 const date = csv[i]['date']
@@ -21,21 +55,30 @@ const MonthChartData = ({data}) => {
                     i += 1
                 }
                 const realDate = new Date(date)
-                temp.push([count])
-                if(ind === 0){
-                    month.push(`${realDate.getMonth() + 1}, ${realDate.getFullYear()}`)
-                }
-                else{
-                    month.push(index > 11 ? `Year ${Math.round(index/12)}`: `Month ${index}`)
-                }
+                temp1.push([realDate.getTime(), count])
+                temp2.push([count])
                 index += 1
             }
-            series.push({
-                data:temp,
-                xaxis:month
+            max = temp1.length > max ? temp1.length : max
+            series1.push({
+                type:"line",
+                name:`P${ind + 1}`,
+                data: temp1,
+            })
+            series2.push({
+                type:"line",
+                name:`P${ind + 1}`,
+                data: temp2,
             })
         })
-        setData(series)
+        for(var i = 1; i <= max; i++){
+            month.push(i > 11 ? `Year ${Math.round(i/12)}`: `Month ${i}`)
+        }
+        setData({
+            s1:series1,
+            s2:series2,
+            mon:month
+        })
     }
     return(
         <>
