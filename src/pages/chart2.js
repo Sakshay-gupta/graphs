@@ -22,7 +22,10 @@ const Chart2 = () => {
             <input type="radio" id="count" name="chart" onClick={changeCount}/>
             <label htmlFor="count">No. of Reviews</label>
         </div> */}
+        <div className="app_container">
         <ChartData2 data={chartData} param={param}/>
+        </div>
+        
     </>)
 }
 

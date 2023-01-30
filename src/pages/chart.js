@@ -51,14 +51,15 @@ const Chart = () => {
     }
     return(<>
         <HeaderChart chartData={chartData}/>
-        <div style={{marginTop:"10px"}}>
+        <div className="app_container">
             <input type="radio" id="rating" name="chart" defaultChecked onClick={changeRate}/>
             <label htmlFor="rating">Review Rating</label>
 
             <input type="radio" id="count" name="chart" onClick={changeCount}/>
             <label htmlFor="count">No. of Reviews</label>
+            {labels ? <ChartData data={chartData} labels={labels} param={param}/> : null}
         </div>
-        {labels ? <ChartData data={chartData} labels={labels} param={param}/> : null}
+        
     </>)
 }
 

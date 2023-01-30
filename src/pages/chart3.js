@@ -88,7 +88,8 @@ const Chart3 = () => {
             <input type="radio" id="count" name="chart" onClick={changeCount}/>
             <label htmlFor="count">No. of Reviews</label>
         </div> */}
-        <div style={{display:"flex"}}>
+        <div className="app_container">
+        <div style={{display:"flex", marginBottom:"10px"}}>
             <div style={{width:"40%"}}>
                 <Select
                     options={ops}
@@ -97,6 +98,7 @@ const Chart3 = () => {
             </div>
         </div>
         {labels ? <PieChartData data={chartData} labels={labels}/> : null}
+        </div>
     </>)
 }
 
