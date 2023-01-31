@@ -3,6 +3,8 @@ import { useLocation } from "react-router";
 import HeaderChart from "../components/headerchart";
 import MonthChartData from "../components/monthChartData";
 import Papa from 'papaparse'
+import axios from "axios";
+import Table from "../components/table";
 const timeStampMonth =  (date) => {
     const arr = ["None","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const temp = date.split(' ');
@@ -17,12 +19,46 @@ const timeStampMonth =  (date) => {
         return newWeek.getTime();
     }
 }
+
+
 const Chart4 = () => {
     const location = useLocation()
     const [data, setData] = useState([])
     const [load, setLoad] = useState(false)
     const [file, setFile] = useState([])
+    const [table, setTable] = useState(null)
+    useEffect(() => {
+        const send = async () => {
+            const res = await axios.get('table.csv')
+            return res
+        }
 
+        const help = async () => {
+            await send().then((res) => {
+                const parse = Papa.parse(res.data)
+                setTabledata(parse.data)
+            })
+        }
+        help()
+    }, [])
+
+    const setTabledata = (csv) => {
+        const data = []
+        for(var i = 1; i< csv.length; i++){
+            const rowData = {
+                none:csv[i][0], 
+                m1:csv[i][1],
+                m2:csv[i][2],
+                m6:csv[i][3],
+                m9:csv[i][4],
+                m12:csv[i][5],
+                m18:csv[i][6],
+                m20:csv[i][7],
+            }
+            data.push(rowData)
+        }
+        setTable(data)
+    }
     const handleOnChange = (e) => {
         setLoad(false)
         setData([])
@@ -39,7 +75,7 @@ const Chart4 = () => {
             file.map((item, ind) => {
                 Papa.parse(item, {
                     complete:(res) => updateData(res, ind),
-                    header: true});
+                    header: true}); 
             })
         }
         if (file.length) {
@@ -86,7 +122,9 @@ const Chart4 = () => {
 
     return(<>
         <HeaderChart chartData={chartData}/>
+        
         <div className="app_container">
+        {table ? <Table table={table} /> : null}
         {load ? <MonthChartData data={data}/> : null}
         <div className="form-container">
             <label htmlFor="csvInput" className="form-label">Import csv file for Charts</label>

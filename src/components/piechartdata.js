@@ -22,24 +22,12 @@ const PieChartData = ({data, labels}) =>{
                         z:Math.round(parseFloat(csv[ind]['L2 Rating (Review)']) * 100)/100
                     })
                 }
-                else{
-                    positive.push({
-                        name:item,
-                        y:null
-                    })
-                }
                 let ind2 = csv.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Negative'))
                 if(ind2 >= 0){
                     negative.push({
                         name:item,
                         y:parseInt(csv[ind2]['L2 Review Count']),
                         z:Math.round(parseFloat(csv[ind2]['L2 Rating (Review)']) * 100)/100
-                    })
-                }
-                else{
-                    negative.push({
-                        name:item,
-                        y:null
                     })
                 }
             })
