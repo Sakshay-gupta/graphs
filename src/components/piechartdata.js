@@ -19,7 +19,8 @@ const PieChartData = ({data, labels}) =>{
                     positive.push({
                         name:item,
                         y:parseInt(csv[ind]['L2 Review Count']),
-                        z:Math.round(parseFloat(csv[ind]['L2 Rating (Review)']) * 100)/100
+                        rate:Math.round(parseFloat(csv[ind]['L2 Rating (Review)']) * 100)/100,
+                        z:Math.round(parseFloat(csv[ind]['L2 Rating (Review)']) * 100 * parseInt(csv[ind]['L2 Review Count']))/100
                     })
                 }
                 let ind2 = csv.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Negative'))
@@ -27,7 +28,8 @@ const PieChartData = ({data, labels}) =>{
                     negative.push({
                         name:item,
                         y:parseInt(csv[ind2]['L2 Review Count']),
-                        z:Math.round(parseFloat(csv[ind2]['L2 Rating (Review)']) * 100)/100
+                        rate:Math.round(parseFloat(csv[ind2]['L2 Rating (Review)']) * 100)/100,
+                        z:Math.round(parseFloat(csv[ind2]['L2 Rating (Review)']) * 100 * parseInt(csv[ind2]['L2 Review Count']))/100
                     })
                 }
             })

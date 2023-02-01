@@ -13,7 +13,7 @@ const options = {
         type: 'variablepie'
     },
     tooltip: {
-        pointFormat: '{series.name}:<br />Count: <b>{point.y}</b><br/>Rating: <b>{point.z}</b>'
+        pointFormat: '{series.name}:<br />Count: <b>{point.y}</b><br/>Rating: <b>{point.rate}</b>'
     },
     accessibility: {
         point: {
