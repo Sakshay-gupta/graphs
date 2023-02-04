@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from "react";
-import { useLocation } from "react-router";
 import HeaderChart from "../components/headerchart";
-import ChartData from "../components/linechartdata";
-const Chart = () => {
-    const location = useLocation()
+import { useLocation } from "react-router";
+import DrillDownPie from "../components/chartsdata/drilldownpiedata";
+
+
+const Chart5 = () => {
+    const location = useLocation();
     const {chartData} = location.state
-    const [param, setParam] = useState("L2 Rating (Review)")
     const [labels, setLabels] = useState(null)
     useEffect(() => {
-        setLabels(setXaxispre(chartData))
-        console.log(chartData)
+        setLabels(setXaxispre(chartData, 10))
     }, [])
 
-    const setXaxispre = (data) => {
+    const setXaxispre = (data, sortBy) => {
         let temp1 = []
         let cate = []
         data[0].map(item => {
@@ -38,29 +38,17 @@ const Chart = () => {
             })
         })
         temp.sort((a, b) => b.count - a.count)
-        for(var i = 0; i < 10; i++){
+        for(var i = 0; i < (temp.length < sortBy ? temp.length : sortBy); i++){
             cate.push(temp[i]['l2'])
         }
         return cate;
     }
-    const changeRate = () => {
-        setParam("L2 Rating (Review)")
-    }
-    const changeCount = () => {
-        setParam("L2 Review Count")
-    }
     return(<>
         <HeaderChart chartData={chartData}/>
         <div className="app_container">
-            <input type="radio" id="rating" name="chart" defaultChecked onClick={changeRate}/>
-            <label htmlFor="rating">Review Rating</label>
-
-            <input type="radio" id="count" name="chart" onClick={changeCount}/>
-            <label htmlFor="count">No. of Reviews</label>
-            {labels ? <ChartData data={chartData} labels={labels} param={param}/> : null}
+            {labels ? <DrillDownPie data={chartData} labels={labels}/> : null}
         </div>
-        
     </>)
 }
 
-export default Chart;
+export default Chart5;

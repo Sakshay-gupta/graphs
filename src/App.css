@@ -82,6 +82,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin-bottom: 10px;
 }
 .piechartchild{
   flex-basis: "45%" /* explanation below */

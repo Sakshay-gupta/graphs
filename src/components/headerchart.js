@@ -14,6 +14,7 @@ const HeaderChart = (props) =>{
                         <Link className={`nav-elem-3 ${location.pathname === '/chart2' ? "active" : ""}`} to='/chart2' state={{ chartData:props.chartData }}>Comparison Chart</Link>
                         <Link className={`nav-elem-3 ${location.pathname === '/chart3' ? "active" : ""}`} to='/chart3' state={{ chartData:props.chartData }}>Pie Chart</Link>
                         <Link className={`nav-elem-4 ${location.pathname === '/chart4' ? "active" : ""}`} to='/chart4' state={{ chartData:props.chartData }}>Month Chart</Link>
+                        <Link className={`nav-elem-4 ${location.pathname === '/chart5' ? "active" : ""}`} to='/chart5' state={{ chartData:props.chartData }}>L2-L3 Pie Chart</Link>
                     </div>
                 </div>
             </div>

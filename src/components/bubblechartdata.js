@@ -5,12 +5,13 @@ import BubbleChart from "./bubblechart";
 const ChartData2 = ({data, param}) => {
     const [weekD, setWeekD] = useState(null);
     const [ops, setOps] = useState(null)
+    const [labels, setLabels] = useState(null)
     const [xaxis, setX] = useState(null)
     const [yaxis, setY] = useState(null)
     useEffect(() => {
         const cate = setXaxis(data)
         const temp = []
-        data.map(item => item.pop())
+        data.map(item => item.pop()) // This
         cate.map(item => {
             temp.push({
                 value:item,
@@ -57,9 +58,10 @@ const ChartData2 = ({data, param}) => {
             })
         })
         temp.sort((a, b) => b.count - a.count)
-        for(var i = 0; i < 10; i++){
+        for(var i = 0; i < (temp.length > 10 ? 10 : temp.length); i++){
             cate.push(temp[i]['l2'])
         }
+        setLabels(cate)
         return cate;
     }
     
@@ -155,12 +157,21 @@ const ChartData2 = ({data, param}) => {
                 }
             }
         })
-        setWeekD({
-            pointspve:dataPointspve,
-            pointsnve:dataPointsnve,
-            xval:xaxis.value,
-            yval:yaxis.value
-        })
+        console.log(dataPointspve)
+        setWeekD([
+            {
+                bubble:dataPointspve,
+                senti:"Positive",
+                xval:xaxis.value,
+                yval:yaxis.value
+            },
+            {
+                bubble:dataPointsnve,
+                senti:"Negative",
+                xval:xaxis.value,
+                yval:yaxis.value
+            }
+        ])
     }
     return(
         <>
@@ -185,7 +196,7 @@ const ChartData2 = ({data, param}) => {
                 </div>
                 <div style={{alignSelf: "center"}}><button onClick={handleFilter}> Filter Chart</button></div>
             </div> : null }
-            {weekD ? <BubbleChart data={weekD} params={param}/> : "Select Cluster to compare"}
+            {weekD ? <BubbleChart data={weekD} labels={labels} params={param}/> : "Select Cluster to compare"}
         </>
     )
 }

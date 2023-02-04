@@ -9,7 +9,6 @@ const ChartData = ({data, param, labels}) => {
     const [chartSeries, setCS] = useState(null);
     useEffect(() => {
         const temp = []
-        data.map(item => item.pop())
         labels.map(item => {
             temp.push({
                 value:item,
@@ -45,11 +44,11 @@ const ChartData = ({data, param, labels}) => {
             temp1.map(item => {
                 let sum = 0
                 data.map(item2 => {
-                    let ind = item2.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Positive'))
+                    const ind = item2.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Positive'))
                     if(ind >= 0){
                         sum += parseInt(item2[ind]['L2 Review Count'])
                     }
-                    let ind2 = item2.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Negative'))
+                    const ind2 = item2.findIndex(x => (x['L2 Cluster'] === item && x['Sentiment'] === 'Negative'))
                     if(ind2 >= 0){
                         sum += parseInt(item2[ind2]['L2 Review Count'])
                     }
@@ -95,7 +94,7 @@ const ChartData = ({data, param, labels}) => {
                 nve:[]
             }
             cate.map((item) => {
-                let ind = csv.findIndex( x => {
+                const ind = csv.findIndex( x => {
                     if(x['L2 Cluster'] === item && x['Sentiment'] === 'Positive'){
                         return true
                     }
@@ -103,12 +102,15 @@ const ChartData = ({data, param, labels}) => {
                 })
                 if(ind >= 0){
                     max = csv[ind][`${param}`] > max ? parseInt(csv[ind][`${param}`]) + 1 : max
-                    dataPoints.pve.push(parseFloat(csv[ind][`${param}`]))
+                    dataPoints.pve.push({
+                        name:item,
+                        y:parseFloat(csv[ind][`${param}`])
+                    })
                 }
                 else{
                     dataPoints.pve.push(null)
                 }
-                let ind2 = csv.findIndex( x => {
+                const ind2 = csv.findIndex( x => {
                     if(x['L2 Cluster'] === item && x['Sentiment'] === 'Negative'){
                         return true
                     }
@@ -116,7 +118,10 @@ const ChartData = ({data, param, labels}) => {
                 })
                 if(ind2 >= 0){
                     max = csv[ind2][`${param}`] > max ? parseInt(csv[ind2][`${param}`]) + 1 : max
-                    dataPoints.nve.push(parseFloat(csv[ind2][`${param}`]) * -1)
+                    dataPoints.nve.push({
+                        name:item,
+                        y:(parseFloat(csv[ind2][`${param}`]) * -1)
+                    })
                 }else{
                     dataPoints.nve.push(null)
                 }
@@ -164,7 +169,7 @@ const ChartData = ({data, param, labels}) => {
                 <div style={{alignSelf: "center"}}><button onClick={handleFilter}> Filter Chart</button></div>
                 {/* <div style={{alignSelf: "center"}}><button onClick={handleRemove}> Remove Filter</button></div> */}
             </div> : null }
-            {weekD ? <Linechart data={weekD} chartS={chartSeries} params={param}/> : "Building"}
+            {weekD ? <Linechart data={weekD} labels={labels} chartS={chartSeries} params={param}/> : "Building"}
         </>
     )
 }

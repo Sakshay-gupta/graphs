@@ -54,7 +54,7 @@ const MonthChart = ({data}) => {
     return(
         <>
         {data ? 
-            <><div >
+            <div style={{marginBottom:"20px"}}><div style={{marginBottom:"20px"}}>
             <HighchartsReact
             highcharts={Highcharts}
             constructorType={'stockChart'}
@@ -88,7 +88,7 @@ const MonthChart = ({data}) => {
                 series:[...data['s2']]
             }}
             allowChartUpdate = {true} />
-        </div></>
+        </div></div>
         : null}
         </>
     )

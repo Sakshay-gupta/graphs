@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 class Homeclass extends React.Component {
     constructor(props){
         super(props);
-        sessionStorage.clear()
         this.state = {
             file:[],
             data:[],
@@ -35,8 +34,7 @@ class Homeclass extends React.Component {
         }, () => {
             if (this.state.file.length) {
                 const help = async () => {
-                    await set().then(() => {
-                    })
+                    await set()
                 }
                 help()
             }
@@ -50,19 +48,26 @@ class Homeclass extends React.Component {
         }
     };
     updateData = (res, ind) =>{
-        if(ind === this.state.file.length - 1){
+        console.log(this.state.data.length)
+        if(this.state.data.length === (this.state.file.length)){
             this.setState(prev => ({
                 load:false,
                 data:[...prev.data, res.data]
             }), () => {
+                console.log(this.state.data)
                 //sessionStorage.setItem('data', JSON.stringify(this.state.data))
                 this.props.navi('/chart', {state:{chartData:this.state.data}})
             })
         }
         else{
             this.setState(prev => ({
+                load:false,
                 data:[...prev.data, res.data]
-            }))
+            }), () => {
+                if(this.state.data.length === (this.state.file.length)){
+                    this.props.navi('/chart', {state:{chartData:this.state.data}})
+                }
+            })
         }
     }
     render(){

@@ -36,6 +36,7 @@ const Chart4 = () => {
         const help = async () => {
             await send().then((res) => {
                 const parse = Papa.parse(res.data)
+                console.log(parse.data)
                 setTabledata(parse.data)
             })
         }
@@ -89,6 +90,9 @@ const Chart4 = () => {
     };
     const updateData = (res, ind) =>{
         if(ind === file.length - 1){
+            if(res.data[res.data.length - 1]['Date'] === ''){
+                res.data.pop()
+            }
             setData(prev => {
                 return[...prev, res.data]
             })
@@ -115,6 +119,7 @@ const Chart4 = () => {
             temp.sort((a, b) => a.date - b.date)
             arr.push(temp)
         })
+        
         setData(arr)
     }
 
